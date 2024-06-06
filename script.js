@@ -1,6 +1,5 @@
-
-
-let h3 = document.getElementById("h3");
+let contatore = 0;
+let h3 = document.querySelector(".h3");
 let userJobs = document.getElementById("userjobs");
 let jobsArray = [];
 let jobGiven = "";
@@ -98,41 +97,42 @@ const jobs = [
 ];
 
 function giveJobs(title, location) {
-    jobsArray = [];
-   
+  jobsArray = [];
+
   for (let i = 0; i < jobs.length; i++) {
-    if ((title === "" || jobs[i].title.toLowerCase().includes(title)) &&
+    if (
+      (title === "" || jobs[i].title.toLowerCase().includes(title)) &&
       (location === "" || jobs[i].location.toLowerCase().includes(location))
     ) {
       jobsArray.push({
         title: jobs[i].title,
         location: jobs[i].location,
       });
-      
-      
-      
-    } 
-    } if(jobsArray.length === 0){
-      let noJob = document.createElement("li");
-      noJob.innerText = "Nessun lavoto trovato";
-      userJobs.appendChild(noJob);
+      btn.classList.add("buttonclicked");
+      h3.classList.add("h3-visible");
+    }
+  }
+  if (jobsArray.length === 0) {
+    let noJob = document.createElement("li");
+    noJob.innerText = "Nessun lavoto trovato";
+    userJobs.appendChild(noJob);
+  } else {
+
+  }
+   
+  for (let i = 0; i < jobsArray.length; i++) {
+    jobGiven = document.createElement("li");
+    jobGiven.innerText = jobsArray[i].title + jobsArray[i].location;
+    userJobs.append(jobGiven);
+  }
   
-    }for(let i = 0; i < jobsArray.length; i++) {
-      jobGiven = document.createElement("li");
-      jobGiven.innerText = jobsArray[i].title + jobsArray[i].location;
-      userJobs.append(jobGiven);
-  } 
-  
+  console.log(contatore + jobsArray.length);
 }
 
-
-btn.addEventListener("click", function() {
+btn.addEventListener("click", function () {
   userJobs.innerHTML = "";
   let userTitle = document.getElementById("usertitle").value;
-let userLocation = document.getElementById("userlocation").value;
+  let userLocation = document.getElementById("userlocation").value;
   giveJobs(userTitle, userLocation);
-  btn.classList.add("buttonclicked");
   
-  
-
 });
